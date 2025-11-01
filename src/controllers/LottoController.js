@@ -1,10 +1,10 @@
+import { InputParser } from "../io/InputParser.js";
 import { InputView } from "../views/InputView.js";
 
 export class LottoController {
   async start() {
     const priceInput = await InputView.readPrice(); // 구입금액을 입력해 주세요.
-    console.log(priceInput);
-    // const price = InputParser.parsePrice(priceInput);
+    const price = InputParser.parsePrice(priceInput);
 
     // const lottoCount = LottoManager.getLottoCount(price);
     // const lottoGenerator = new LottoGenerator(lottoCount);
