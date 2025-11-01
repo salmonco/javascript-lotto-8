@@ -1,10 +1,14 @@
 import { InputParser } from "../io/InputParser.js";
+import { LottoManager } from "../models/LottoManager.js";
 import { InputView } from "../views/InputView.js";
 
 export class LottoController {
   async start() {
     const price = await this.readPrice();
-    // const lottoCount = LottoManager.getLottoCount(price);
+
+    const lottoManager = new LottoManager(price);
+
+    const lottoCount = lottoManager.getLottoCount();
     // const lottoGenerator = new LottoGenerator(lottoCount);
     // const lottos = lottoGenerator.getLottos();
 

@@ -4,10 +4,16 @@ const LOTTO_PRICE_UNIT = 1000;
 export class LottoManager {
   #price;
 
+  constructor(price) {
+    this.#price = price;
+  }
+
   /**
    * 구입 금액에 해당하는 만큼 로또 개수 구하기(price)
    */
-  getLottoCount(price) {}
+  getLottoCount() {
+    return this.#price / LOTTO_PRICE_UNIT;
+  }
 
   getAllWinningStatus(lottos) {
     // const { winningCount, isWinningBonusNumber } = lotto.getWinningStatus()
