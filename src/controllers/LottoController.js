@@ -1,12 +1,14 @@
 import { LottoGenerator } from "../models/LottoGenerator.js";
 import { LottoManager } from "../models/LottoManager.js";
 import { InputParser } from "../utils/InputParser.js";
+import { readLoop } from "../utils/readLoop.js";
+import { Validator } from "../utils/Validator.js";
 import { InputView } from "../views/InputView.js";
 import { OutputView } from "../views/OutputView.js";
 
 export class LottoController {
   async start() {
-    const price = await this.readPrice();
+    const price = await readLoop(this.readPrice, Validator.validatePrice);
 
     const lottoManager = new LottoManager(price);
 
