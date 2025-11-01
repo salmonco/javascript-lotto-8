@@ -20,16 +20,7 @@ export class LottoController {
 
     const { winningNumbers, bonusNumber } = await this.readNumbersLoop();
 
-    const winningStats = lottoManager.getWinningStatus(
-      lottos,
-      winningNumbers,
-      bonusNumber
-    );
-
-    OutputView.printWinningStats(winningStats);
-    OutputView.printRateOfReturn(
-      lottoManager.calculateRateOfReturn(lottos, winningNumbers, bonusNumber)
-    );
+    this.getResult(lottos, winningNumbers, bonusNumber, lottoManager);
   }
 
   async readPrice() {
@@ -64,5 +55,18 @@ export class LottoController {
   printLottoStatus(lottoCount, lottos) {
     OutputView.printLottoCount(lottoCount);
     OutputView.printLottos(lottos);
+  }
+
+  getResult(lottos, winningNumbers, bonusNumber, lottoManager) {
+    const winningStats = lottoManager.getWinningStatus(
+      lottos,
+      winningNumbers,
+      bonusNumber
+    );
+
+    OutputView.printWinningStats(winningStats);
+    OutputView.printRateOfReturn(
+      lottoManager.calculateRateOfReturn(lottos, winningNumbers, bonusNumber)
+    );
   }
 }
