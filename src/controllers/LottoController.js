@@ -16,7 +16,7 @@ export class LottoController {
 
     // output
     OutputView.printLottoCount(lottoCount);
-    // View.output.printLottos(lottos);
+    OutputView.printLottos(lottos);
 
     // input
     const winningNumbersInput = "1,2,3,4,5,6"; // 당첨 번호를 입력해 주세요.

@@ -15,7 +15,13 @@ class Lotto {
   /**
    * 번호를 오름차순 정렬한 문자열 반환
    */
-  toString() {}
+  toString() {
+    return `[${this.#getSortedNumbers().join(", ")}]`;
+  }
+
+  #getSortedNumbers() {
+    return this.#numbers.slice().sort((a, b) => a - b);
+  }
 
   /**
    * 사용자가 구매한 로또 번호와 당첨 번호를 비교해서 맞은 상태 구하기
