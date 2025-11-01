@@ -19,8 +19,7 @@ export class LottoController {
     OutputView.printLottos(lottos);
 
     // input
-    const winningNumbersInput = "1,2,3,4,5,6"; // 당첨 번호를 입력해 주세요.
-    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const winningNumbers = await this.readWinningNumbers();
 
     // input
     const bonusNumberInput = "7"; // 보너스 번호를 입력해 주세요.
@@ -35,5 +34,11 @@ export class LottoController {
     const priceInput = await InputView.readPrice();
     const price = InputParser.parsePrice(priceInput);
     return price;
+  }
+
+  async readWinningNumbers() {
+    const winningNumbersInput = await InputView.readWinningNumbers();
+    const winningNumbers = InputParser.parseWinningNumbers(winningNumbersInput);
+    return winningNumbers;
   }
 }
