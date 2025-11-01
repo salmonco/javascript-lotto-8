@@ -3,9 +3,7 @@ import { InputView } from "../views/InputView.js";
 
 export class LottoController {
   async start() {
-    const priceInput = await InputView.readPrice(); // 구입금액을 입력해 주세요.
-    const price = InputParser.parsePrice(priceInput);
-
+    const price = await this.readPrice();
     // const lottoCount = LottoManager.getLottoCount(price);
     // const lottoGenerator = new LottoGenerator(lottoCount);
     // const lottos = lottoGenerator.getLottos();
@@ -25,5 +23,11 @@ export class LottoController {
     // output
     // View.output.printWinningStats(LottoManger.getWinningStatus(lottos)); // 당첨 통계\n—{}
     // View.output.printRateOfReturn(); // 총 수익률은 62.5%입니다.
+  }
+
+  async readPrice() {
+    const priceInput = await InputView.readPrice();
+    const price = InputParser.parsePrice(priceInput);
+    return price;
   }
 }

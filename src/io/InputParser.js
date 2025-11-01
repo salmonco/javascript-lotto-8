@@ -1,5 +1,5 @@
 export const InputParser = {
-  parsePrice: (input) => {},
+  parsePrice: (input) => Number(input),
 
   splitByComma: (input) => input.split(","),
 
