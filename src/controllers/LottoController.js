@@ -24,8 +24,14 @@ export class LottoController {
     // input
     const bonusNumber = await this.readBonusNumber();
 
+    const winningStats = lottoManager.getWinningStatus(
+      lottos,
+      winningNumbers,
+      bonusNumber
+    );
+
     // output
-    // View.output.printWinningStats(LottoManger.getWinningStatus(lottos)); // 당첨 통계\n—{}
+    OutputView.printWinningStats(winningStats);
     // View.output.printRateOfReturn(); // 총 수익률은 62.5%입니다.
   }
 

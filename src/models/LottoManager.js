@@ -1,3 +1,5 @@
+import { LOTTO_WINNING_INFO } from "../constants/lotto.js";
+
 // TODO: 1,000으로 나누어지지 않으면 에러 출력
 const LOTTO_PRICE_UNIT = 1000;
 
@@ -15,15 +17,33 @@ export class LottoManager {
     return this.#price / LOTTO_PRICE_UNIT;
   }
 
-  getAllWinningStatus(lottos) {
-    // const { winningCount, isWinningBonusNumber } = lotto.getWinningStatus()
-    //  return [ { winningCount, isWinningBonusNumber }, {}, ]
+  getWinningStatus(lottos, winningNumbers, bonusNumber) {
+    const matchingStatus = this.#getMatchingStatus(
+      lottos,
+      winningNumbers,
+      bonusNumber
+    );
+
+    return Object.keys(LOTTO_WINNING_INFO).reduce((acc, winnerLevel) => {
+      acc[winnerLevel] = this.#getMatchingCount(matchingStatus, winnerLevel);
+      return acc;
+    }, {});
   }
 
-  getWinningStatus(lottos) {
-    // const [{}, {}, ] = getAllWinningStatus(lottos)
-    // contants 사용해서 보여줄 데이터(등수에 따른 당첨수)만 맵핑
-    //   return { 1등: 1, 2등: 0, 3등: 0, }
+  #getMatchingStatus(lottos, winningNumbers, bonusNumber) {
+    return lottos.map((lotto) =>
+      lotto.getMatchingStatus(winningNumbers, bonusNumber)
+    );
+  }
+
+  #getMatchingCount(matchingStatus, winnerLevel) {
+    const winnerInfo = LOTTO_WINNING_INFO[winnerLevel];
+
+    return matchingStatus.filter(
+      ({ matchingCount, isMatchingBonusNumber }) =>
+        matchingCount === winnerInfo.matchingCount &&
+        isMatchingBonusNumber === winnerInfo.isMatchingBonusNumber
+    ).length;
   }
 
   /**
