@@ -1,4 +1,5 @@
 import { InputParser } from "../io/InputParser.js";
+import { LottoGenerator } from "../models/LottoGenerator.js";
 import { LottoManager } from "../models/LottoManager.js";
 import { InputView } from "../views/InputView.js";
 
@@ -9,8 +10,8 @@ export class LottoController {
     const lottoManager = new LottoManager(price);
 
     const lottoCount = lottoManager.getLottoCount();
-    // const lottoGenerator = new LottoGenerator(lottoCount);
-    // const lottos = lottoGenerator.getLottos();
+    const lottoGenerator = new LottoGenerator(lottoCount);
+    const lottos = lottoGenerator.getLottos();
 
     // output
     // View.output.printLottoCount(); // 8개를 구매했습니다.
