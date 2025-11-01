@@ -7,9 +7,22 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (!this.#isValidNumberLength(numbers)) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+
+    if (!this.#isUniqueNumbers(numbers)) {
+      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
+    }
+  }
+
+  #isValidNumberLength(numbers) {
+    return numbers.length === 6;
+  }
+
+  #isUniqueNumbers(numbers) {
+    const uniqueNumbers = new Set(numbers);
+    return uniqueNumbers.size === numbers.length;
   }
 
   /**
