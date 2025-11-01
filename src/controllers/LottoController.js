@@ -14,14 +14,9 @@ export class LottoController {
     const lottoGenerator = new LottoGenerator(lottoCount);
     const { lottos } = lottoGenerator;
 
-    // output
-    OutputView.printLottoCount(lottoCount);
-    OutputView.printLottos(lottos);
+    this.printLottoStatus(lottoCount, lottos);
 
-    // input
     const winningNumbers = await this.readWinningNumbers();
-
-    // input
     const bonusNumber = await this.readBonusNumber();
 
     const winningStats = lottoManager.getWinningStatus(
@@ -30,7 +25,6 @@ export class LottoController {
       bonusNumber
     );
 
-    // output
     OutputView.printWinningStats(winningStats);
     OutputView.printRateOfReturn(
       lottoManager.calculateRateOfReturn(lottos, winningNumbers, bonusNumber)
@@ -53,5 +47,10 @@ export class LottoController {
     const bonusNumberInput = await InputView.readBonusNumber();
     const bonusNumber = InputParser.parseBonusNumber(bonusNumberInput);
     return bonusNumber;
+  }
+
+  printLottoStatus(lottoCount, lottos) {
+    OutputView.printLottoCount(lottoCount);
+    OutputView.printLottos(lottos);
   }
 }
