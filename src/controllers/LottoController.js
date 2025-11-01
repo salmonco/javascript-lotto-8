@@ -8,7 +8,7 @@ import { OutputView } from "../views/OutputView.js";
 
 export class LottoController {
   async start() {
-    const price = await readLoop(this.readPrice, Validator.validatePrice);
+    const price = await readLoop(this.readPrice);
 
     const lottoManager = new LottoManager(price);
 
@@ -18,8 +18,7 @@ export class LottoController {
 
     this.printLottoStatus(lottoCount, lottos);
 
-    const winningNumbers = await this.readWinningNumbers();
-    const bonusNumber = await this.readBonusNumber();
+    const { winningNumbers, bonusNumber } = await this.readNumbersLoop();
 
     const winningStats = lottoManager.getWinningStatus(
       lottos,
@@ -35,19 +34,30 @@ export class LottoController {
 
   async readPrice() {
     const priceInput = await InputView.readPrice();
+    Validator.validatePrice(priceInput);
     const price = InputParser.parsePrice(priceInput);
     return price;
+  }
+
+  async readNumbersLoop() {
+    const winningNumbers = await readLoop(this.readWinningNumbers);
+    const bonusNumber = await readLoop(() =>
+      this.readBonusNumber(winningNumbers)
+    );
+    return { winningNumbers, bonusNumber };
   }
 
   async readWinningNumbers() {
     const winningNumbersInput = await InputView.readWinningNumbers();
     const winningNumbers = InputParser.parseWinningNumbers(winningNumbersInput);
+    Validator.validateWinningNumbers(winningNumbers);
     return winningNumbers;
   }
 
-  async readBonusNumber() {
+  async readBonusNumber(winningNumbers) {
     const bonusNumberInput = await InputView.readBonusNumber();
     const bonusNumber = InputParser.parseBonusNumber(bonusNumberInput);
+    Validator.validateBonusNumber(bonusNumber, winningNumbers);
     return bonusNumber;
   }
 

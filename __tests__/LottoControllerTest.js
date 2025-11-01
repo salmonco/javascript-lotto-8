@@ -43,7 +43,9 @@ describe("LottoControllerTest", () => {
     const lottoController = new LottoController();
 
     // when
-    const bonusNumberPromise = lottoController.readBonusNumber();
+    const bonusNumberPromise = lottoController.readBonusNumber([
+      1, 2, 3, 4, 5, 6,
+    ]);
 
     // then
     return bonusNumberPromise.then((bonusNumber) => {
