@@ -13,7 +13,7 @@ const mockQuestions = (inputs) => {
 
 describe("LottoControllerTest", () => {
   test("readPrice", () => {
-    mockQuestions(["8000", "1,2,3,4,5,6", "7"]);
+    mockQuestions(["8000"]);
     const lottoController = new LottoController();
 
     // when
@@ -22,6 +22,32 @@ describe("LottoControllerTest", () => {
     // then
     return pricePromise.then((price) => {
       expect(price).toBe(8000);
+    });
+  });
+
+  test("readWinningNumbers", () => {
+    mockQuestions(["1,2,3,4,5,6"]);
+    const lottoController = new LottoController();
+
+    // when
+    const winningNumbersPromise = lottoController.readWinningNumbers();
+
+    // then
+    return winningNumbersPromise.then((winningNumbers) => {
+      expect(winningNumbers).toEqual([1, 2, 3, 4, 5, 6]);
+    });
+  });
+
+  test("readBonusNumber", () => {
+    mockQuestions(["7"]);
+    const lottoController = new LottoController();
+
+    // when
+    const bonusNumberPromise = lottoController.readBonusNumber();
+
+    // then
+    return bonusNumberPromise.then((bonusNumber) => {
+      expect(bonusNumber).toBe(7);
     });
   });
 });
