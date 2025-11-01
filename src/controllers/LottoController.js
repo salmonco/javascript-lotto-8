@@ -2,6 +2,7 @@ import { InputParser } from "../io/InputParser.js";
 import { LottoGenerator } from "../models/LottoGenerator.js";
 import { LottoManager } from "../models/LottoManager.js";
 import { InputView } from "../views/InputView.js";
+import { OutputView } from "../views/OutputView.js";
 
 export class LottoController {
   async start() {
@@ -11,10 +12,10 @@ export class LottoController {
 
     const lottoCount = lottoManager.getLottoCount();
     const lottoGenerator = new LottoGenerator(lottoCount);
-    const lottos = lottoGenerator.getLottos();
+    const { lottos } = lottoGenerator;
 
     // output
-    // View.output.printLottoCount(); // 8개를 구매했습니다.
+    OutputView.printLottoCount(lottoCount);
     // View.output.printLottos(lottos);
 
     // input
