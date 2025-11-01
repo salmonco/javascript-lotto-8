@@ -1,6 +1,6 @@
-import { InputParser } from "../io/InputParser.js";
 import { LottoGenerator } from "../models/LottoGenerator.js";
 import { LottoManager } from "../models/LottoManager.js";
+import { InputParser } from "../utils/InputParser.js";
 import { InputView } from "../views/InputView.js";
 import { OutputView } from "../views/OutputView.js";
 
@@ -32,7 +32,9 @@ export class LottoController {
 
     // output
     OutputView.printWinningStats(winningStats);
-    // View.output.printRateOfReturn(); // 총 수익률은 62.5%입니다.
+    OutputView.printRateOfReturn(
+      lottoManager.calculateRateOfReturn(lottos, winningNumbers, bonusNumber)
+    );
   }
 
   async readPrice() {
