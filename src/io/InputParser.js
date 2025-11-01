@@ -7,6 +7,8 @@ export const InputParser = {
     return winningNumbers;
   },
 
+  parseBonusNumber: (input) => Number(input),
+
   splitByComma: (input) => input.split(","),
 
   parseToNumbers: (inputs) => inputs.map(Number),

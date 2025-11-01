@@ -22,8 +22,7 @@ export class LottoController {
     const winningNumbers = await this.readWinningNumbers();
 
     // input
-    const bonusNumberInput = "7"; // 보너스 번호를 입력해 주세요.
-    const bonusNumber = 7;
+    const bonusNumber = await this.readBonusNumber();
 
     // output
     // View.output.printWinningStats(LottoManger.getWinningStatus(lottos)); // 당첨 통계\n—{}
@@ -40,5 +39,11 @@ export class LottoController {
     const winningNumbersInput = await InputView.readWinningNumbers();
     const winningNumbers = InputParser.parseWinningNumbers(winningNumbersInput);
     return winningNumbers;
+  }
+
+  async readBonusNumber() {
+    const bonusNumberInput = await InputView.readBonusNumber();
+    const bonusNumber = InputParser.parseBonusNumber(bonusNumberInput);
+    return bonusNumber;
   }
 }

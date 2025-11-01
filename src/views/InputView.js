@@ -6,5 +6,7 @@ export const InputView = {
 
   readWinningNumbers: () =>
     MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n"),
-  // 보너스 번호를 입력받기
+
+  readBonusNumber: () =>
+    MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n"),
 };
