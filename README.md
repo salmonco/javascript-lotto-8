@@ -33,7 +33,7 @@ View.output.printRateOfReturn() // 총 수익률은 62.5%입니다.
 * getWinningStatus - 사용자가 구매한 로또 번호와 당첨 번호를 비교해서 맞은 상태 구하기(winnigNumbers, bonusNumber)
   - return { 6개 숫자 중 몇 개 맞췄는지, 보너스 번호 맞춘 여부 }
 
-LottoGenerator
+### LottoGenerator
 
 - #lottos
 - lottoCount만큼 로또 객체 생성해서 lottos에 저장
