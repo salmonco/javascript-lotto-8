@@ -1,7 +1,4 @@
-import { LOTTO_WINNING_INFO } from "../constants/lotto.js";
-
-// TODO: 1,000으로 나누어지지 않으면 에러 출력
-const LOTTO_PRICE_UNIT = 1000;
+import { LOTTO_PRICE_UNIT, LOTTO_WINNING_INFO } from "../constants/lotto.js";
 
 export class LottoManager {
   #price;
