@@ -6,11 +6,7 @@ export const OutputView = {
   printLottoCount: (count) =>
     MissionUtils.Console.print(`${count}개를 구매했습니다.`),
 
-  printLottos: (lottos) => {
-    lottos.forEach((lotto) => {
-      MissionUtils.Console.print(lotto.toString());
-    });
-  },
+  printLottos: (lottos) => MissionUtils.Console.print(lottos.toString()),
 
   printWinningStats: (winningStatus) => {
     MissionUtils.Console.print("당첨 통계\n---");
