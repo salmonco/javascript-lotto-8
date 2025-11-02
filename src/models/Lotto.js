@@ -40,7 +40,7 @@ class Lotto {
 
   /**
    * 사용자가 구매한 로또 번호와 당첨 번호를 비교해서 맞은 상태 구하기
-   * @returns 6개 숫자 중 몇 개 맞췄는지, 보너스 번호 맞춘 여부
+   * @returns 추첨 숫자 중 몇 개 맞췄는지, 보너스 번호 맞춘 여부
    */
   getMatchingStatus(winningNumbers, bonusNumber) {
     const matchingCount = this.#getMatchingCount(winningNumbers);

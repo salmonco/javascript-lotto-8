@@ -8,8 +8,12 @@ export class LottoManager {
   }
 
   /**
-   * 구입 금액에 해당하는 만큼 로또 개수 구하기(price)
+   * 소수점 둘째 자리에서 반올림
    */
+  static #roundToSecondDecimalPlace(value) {
+    return value.toFixed(1);
+  }
+
   getLottoCount() {
     return this.#price / LOTTO_PRICE_UNIT;
   }
@@ -53,7 +57,7 @@ export class LottoManager {
     const value =
       this.#calculateWinningPrice(lottos, winningNumbers, bonusNumber) /
       this.#price;
-    return this.#roundToSecondDecimalPlace(value * 100);
+    return LottoManager.#roundToSecondDecimalPlace(value * 100);
   }
 
   /**
@@ -71,12 +75,5 @@ export class LottoManager {
       const count = winningStatus[winnerLevel];
       return acc + count * winningPrice;
     }, 0);
-  }
-
-  /**
-   * 소수점 둘째 자리에서 반올림
-   */
-  #roundToSecondDecimalPlace(value) {
-    return value.toFixed(1);
   }
 }
