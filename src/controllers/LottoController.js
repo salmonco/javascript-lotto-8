@@ -1,5 +1,4 @@
-import { LottoGenerator } from "../models/LottoGenerator.js";
-import { LottoManager } from "../models/LottoManager.js";
+import { LottoManager } from "../services/LottoManager.js";
 import { InputParser } from "../utils/InputParser.js";
 import { readLoop } from "../utils/readLoop.js";
 import { Validator } from "../validators/Validator.js";
@@ -9,14 +8,10 @@ import { OutputView } from "../views/OutputView.js";
 export class LottoController {
   #lottoManager;
 
-  #lottoGenerator;
-
   async start() {
     const price = await LottoController.#readPriceLoop();
     this.#lottoManager = new LottoManager(price);
 
-    const lottoCount = this.#lottoManager.getLottoCount();
-    this.#lottoGenerator = new LottoGenerator(lottoCount);
     this.#printLottoStatus();
 
     const { winningNumbers, bonusNumber } =
@@ -58,7 +53,7 @@ export class LottoController {
 
   #printLottoStatus() {
     OutputView.printLottoCount(this.#lottoManager.getLottoCount());
-    OutputView.printLottos(this.#lottoGenerator);
+    OutputView.printLottos(this.#lottoManager.lottoGenerator);
   }
 
   #getResult(winningNumbers, bonusNumber) {
@@ -68,7 +63,6 @@ export class LottoController {
 
   #getWinningStats(winningNumbers, bonusNumber) {
     const winningStats = this.#lottoManager.getWinningStatus(
-      this.#lottoGenerator.lottos,
       winningNumbers,
       bonusNumber
     );
@@ -77,7 +71,6 @@ export class LottoController {
 
   #getRateOfReturn(winningNumbers, bonusNumber) {
     const rateOfReturn = this.#lottoManager.calculateRateOfReturn(
-      this.#lottoGenerator.lottos,
       winningNumbers,
       bonusNumber
     );

@@ -1,4 +1,4 @@
-import { LottoManager } from "../src/models/LottoManager.js";
+import { LottoManager } from "../src/services/LottoManager.js";
 
 describe("LottoManagerTest", () => {
   test("getLottoCount", () => {

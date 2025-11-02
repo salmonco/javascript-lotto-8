@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { WINNING_NUMBER_COUNT } from "../validators/WinningNumberValidator.js";
 import Lotto from "./Lotto.js";
 
 export class LottoGenerator {
@@ -9,7 +10,11 @@ export class LottoGenerator {
   }
 
   static generateRandomNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      45,
+      WINNING_NUMBER_COUNT
+    );
   }
 
   toString() {
