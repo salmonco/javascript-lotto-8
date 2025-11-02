@@ -1,3 +1,5 @@
+import { throwError } from "../utils/throwError.js";
+
 class Lotto {
   #numbers;
 
@@ -8,11 +10,11 @@ class Lotto {
 
   #validate(numbers) {
     if (!this.#isValidNumberLength(numbers)) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throwError("로또 번호는 6개여야 합니다.");
     }
 
     if (!this.#isUniqueNumbers(numbers)) {
-      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
+      throwError("로또 번호는 중복될 수 없습니다.");
     }
   }
 
