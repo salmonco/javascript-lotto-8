@@ -12,43 +12,44 @@ export class LottoController {
   #lottoGenerator;
 
   async start() {
-    const price = await readLoop(this.readPrice);
-
+    const price = await LottoController.#readPriceLoop();
     this.#lottoManager = new LottoManager(price);
 
     const lottoCount = this.#lottoManager.getLottoCount();
     this.#lottoGenerator = new LottoGenerator(lottoCount);
-
     this.#printLottoStatus();
 
-    const { winningNumbers, bonusNumber } = await this.readNumbersLoop();
-
+    const { winningNumbers, bonusNumber } =
+      await LottoController.#readNumbersLoop();
     this.#getResult(winningNumbers, bonusNumber);
   }
 
-  async readPrice() {
-    const priceInput = await InputView.readPrice();
-    Validator.validatePrice(priceInput);
-    const price = InputParser.parsePrice(priceInput);
-    return price;
+  static #readPriceLoop() {
+    return readLoop(LottoController.#readPrice);
   }
 
-  async readNumbersLoop() {
-    const winningNumbers = await readLoop(this.readWinningNumbers);
+  static async #readPrice() {
+    const priceInput = await InputView.readPrice();
+    Validator.validatePrice(priceInput);
+    return InputParser.parsePrice(priceInput);
+  }
+
+  static async #readNumbersLoop() {
+    const winningNumbers = await readLoop(LottoController.#readWinningNumbers);
     const bonusNumber = await readLoop(() =>
-      this.readBonusNumber(winningNumbers)
+      LottoController.#readBonusNumber(winningNumbers)
     );
     return { winningNumbers, bonusNumber };
   }
 
-  async readWinningNumbers() {
+  static async #readWinningNumbers() {
     const winningNumbersInput = await InputView.readWinningNumbers();
     const winningNumbers = InputParser.parseWinningNumbers(winningNumbersInput);
     Validator.validateWinningNumbers(winningNumbers);
     return winningNumbers;
   }
 
-  async readBonusNumber(winningNumbers) {
+  static async #readBonusNumber(winningNumbers) {
     const bonusNumberInput = await InputView.readBonusNumber();
     const bonusNumber = InputParser.parseBonusNumber(bonusNumberInput);
     Validator.validateBonusNumber(bonusNumber, winningNumbers);
@@ -61,19 +62,25 @@ export class LottoController {
   }
 
   #getResult(winningNumbers, bonusNumber) {
+    this.#getWinningStats(winningNumbers, bonusNumber);
+    this.#getRateOfReturn(winningNumbers, bonusNumber);
+  }
+
+  #getWinningStats(winningNumbers, bonusNumber) {
     const winningStats = this.#lottoManager.getWinningStatus(
       this.#lottoGenerator.lottos,
       winningNumbers,
       bonusNumber
     );
-
     OutputView.printWinningStats(winningStats);
-    OutputView.printRateOfReturn(
-      this.#lottoManager.calculateRateOfReturn(
-        this.#lottoGenerator.lottos,
-        winningNumbers,
-        bonusNumber
-      )
+  }
+
+  #getRateOfReturn(winningNumbers, bonusNumber) {
+    const rateOfReturn = this.#lottoManager.calculateRateOfReturn(
+      this.#lottoGenerator.lottos,
+      winningNumbers,
+      bonusNumber
     );
+    OutputView.printRateOfReturn(rateOfReturn);
   }
 }
