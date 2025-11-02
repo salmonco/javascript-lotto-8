@@ -8,6 +8,7 @@ export const OutputView = {
 
   printLottos: (lottos) => MissionUtils.Console.print(lottos.toString()),
 
+  // TODO: 리팩토링 필요
   printWinningStats: (winningStatus) => {
     MissionUtils.Console.print("당첨 통계\n---");
 

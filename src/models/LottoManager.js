@@ -18,6 +18,7 @@ export class LottoManager {
     return this.#price / LOTTO_PRICE_UNIT;
   }
 
+  // TODO: 리팩토링 필요
   getWinningStatus(lottos, winningNumbers, bonusNumber) {
     const matchingStatus = this.#getMatchingStatus(
       lottos,
@@ -40,6 +41,7 @@ export class LottoManager {
     );
   }
 
+  // TODO: 리팩토링 필요
   #getMatchingLottoCount(matchingStatus, winnerLevel) {
     const winnerInfo = LOTTO_WINNING_INFO[winnerLevel];
 
