@@ -1,5 +1,7 @@
 export const LOTTO_PRICE_UNIT = 1000;
 
+export const LOTTO_NUMBER_COUNT = 6;
+
 export const LOTTO_WINNING_INFO = {
   "5등": {
     matchingCount: 3,

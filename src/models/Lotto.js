@@ -1,4 +1,5 @@
-import { throwError } from "../utils/throwError.js";
+import { LottoNumberDuplicateError } from "../errors/lottoNumber/LottoNumberDuplicateError.js";
+import { LottoNumberExceedCountError } from "../errors/lottoNumber/LottoNumberExceedCountError.js";
 
 class Lotto {
   #numbers;
@@ -27,11 +28,11 @@ class Lotto {
 
   #validate(numbers) {
     if (!this.#isValidNumberLength(numbers)) {
-      throwError("로또 번호는 6개여야 합니다.");
+      throw new LottoNumberExceedCountError();
     }
 
     if (!this.#isUniqueNumbers(numbers)) {
-      throwError("로또 번호는 중복될 수 없습니다.");
+      throw new LottoNumberDuplicateError();
     }
   }
 
