@@ -14,5 +14,17 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+  test("getMatchingStatus", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const winningNumbers = [4, 5, 6, 7, 8, 9];
+    const bonusNumber = 10;
+
+    const { matchingCount, isMatchingBonusNumber } = lotto.getMatchingStatus(
+      winningNumbers,
+      bonusNumber
+    );
+
+    expect(matchingCount).toBe(3);
+    expect(isMatchingBonusNumber).toBe(false);
+  });
 });
