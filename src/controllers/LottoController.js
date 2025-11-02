@@ -57,23 +57,11 @@ export class LottoController {
   }
 
   #getResult(winningNumbers, bonusNumber) {
-    this.#getWinningStats(winningNumbers, bonusNumber);
-    this.#getRateOfReturn(winningNumbers, bonusNumber);
-  }
-
-  #getWinningStats(winningNumbers, bonusNumber) {
-    const winningStats = this.#lottoManager.getWinningStatus(
+    const { winningStats, rateOfReturn } = this.#lottoManager.getResults(
       winningNumbers,
       bonusNumber
     );
     OutputView.printWinningStats(winningStats);
-  }
-
-  #getRateOfReturn(winningNumbers, bonusNumber) {
-    const rateOfReturn = this.#lottoManager.calculateRateOfReturn(
-      winningNumbers,
-      bonusNumber
-    );
     OutputView.printRateOfReturn(rateOfReturn);
   }
 }
